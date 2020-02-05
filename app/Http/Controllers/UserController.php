@@ -79,7 +79,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
