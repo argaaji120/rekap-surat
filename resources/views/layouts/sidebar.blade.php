@@ -15,16 +15,16 @@
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MENU</li>
+            <li class="header">MAIN NAVIGATION</li>
 
             <li class="{{ (request()->is('dashboard*')) ? 'active' : '' }}">
-                <a href="javascript:void(0)">
+                <a href="{{ route('dashboard') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             
-            <li class="{{ (request()->is('sekretaris*')) ? 'active' : '' }}">
-                <a href="javascript:void(0)">
+            <li class="{{ (request()->is('users*')) ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}">
                     <i class="fa fa-users"></i> <span>Sekretaris</span>
                 </a>
             </li>
