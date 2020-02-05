@@ -59,7 +59,7 @@
                                             </td>
                                             <td>
                                                 <a href="" class="btn btn-flat btn-sm btn-default">Detail</a>
-                                                <a href="" class="btn btn-flat btn-sm btn-primary">Edit</a>
+                                                <a  href="{{route('users.edit',[$user->id])}}" class="btn btn-flat btn-sm btn-primary">Edit</a>
                                                 <a href="" class="btn btn-flat btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
