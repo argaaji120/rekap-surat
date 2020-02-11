@@ -41,6 +41,7 @@
                                 <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="{{ $user->name }}">
                             </div>
                             
+                            <!-- Role -->
                             <div class="form-group">
                                 <label for="">Roles</label>
                                 <div class="radio">
@@ -59,18 +60,21 @@
                             <div class="form-group">
                                 <label for="avatar">Foto</label>
                                 @if ($user->avatar)
-                                    <img src="{{ asset('assets/dist/img/profile_avatar.jpg') }}" width="100px" class="img-responsive" alt="User Image">
+                                    <img src="{{ asset('storage/'.$user->avatar) }}" width="100px" class="img-responsive" alt="User Image">
                                 @else
-                                    <img class="img-responsive" src="" alt="avatar">
+                                    <img src="{{ asset('assets/dist/img/profile_avatar.jpg') }}" width="20%" class="img-responsive" alt="avatar">
                                 @endif
+                                <br>
                                 <input type="file" name="avatar" id="avatar">
-                                <p class="help-block">Example block-level help text here.</p>
+                                <small><i>Kosongkan jika tidak ingin mengubah foto</i></small>
+                                <p class="help-block">*<i>notice:</i> ukuran foto maksimal 2 MB</p>
                             </div>
 
                             <!-- Password -->
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                                <small><i>Kosongkan jika tidak ingin mengubah password</i></small>
                             </div>
 
                             <!-- Password Comfirmation -->
@@ -79,26 +83,32 @@
                                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Password Confirmation">
                             </div>
 
+                            <!-- Status -->
                             <div class="form-group">
-                                <label for="status">Status</label>
+                                <label>Status</label>
                                 <div class="radio">
                                     <label>
-                                        <input {{ $user->status == "ACTIVE" ? "checked" : "" }} id="status" type="radio" name="status" value="Administrator" class="flat-blue">&nbsp; Active
+                                        <input {{ $user->status == "ACTIVE" ? "checked" : "" }} id="status" type="radio" name="status" value="ACTIVE" class="flat-blue">&nbsp; Active
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input {{ $user->status == "INACTIVE" ? "checked" : "" }} id="status" type="radio" name="status" value="Sekretaris" class="flat-blue">&nbsp; Inactive
+                                        <input {{ $user->status == "INACTIVE" ? "checked" : "" }} id="status" type="radio" name="status" value="INACTIVE" class="flat-blue">&nbsp; Inactive
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="box-footer">
+                            <!-- Kembali -->
                             <button type="button" class="btn btn-flat btn-default" onclick="window.location.href='{{ route('users.index') }}'">
                                 <i class="fa fa-arrow-circle-left"></i>&nbsp; Kembali
                             </button>
-                            <button type="submit" name="update" class="btn btn-flat btn-primary"><i class="fa fa-save"></i>&nbsp; Update</button>
+                            
+                            <!-- Update -->
+                            <button type="submit" name="update" class="btn btn-flat btn-primary">
+                                <i class="fa fa-save"></i>&nbsp; Update
+                            </button>
                         </div>
                     </form>
                 </div>

@@ -40,6 +40,7 @@
                                 <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama">
                             </div>
                             
+                            <!-- Role -->
                             <div class="form-group">
                                 <label for="">Roles</label>
                                 <div class="radio">

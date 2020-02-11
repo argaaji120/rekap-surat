@@ -42,14 +42,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $new_user = new \App\User;
-        $new_user->name = $request->get('nama');
+        $new_user           = new \App\User;
+        $new_user->name     = $request->get('nama');
         $new_user->username = $request->get('username');
         $new_user->password = \Hash::make($request->get('password'));
-        $new_user->roles = $request->get('roles');
+        $new_user->roles    = $request->get('roles');
 
         if ($request->file('avatar')) {
-            $file = $request->file('avatar')->store('avatars', 'public');
+            $file             = $request->file('avatar')->store('avatars', 'public');
             $new_user->avatar = $file;
         }
 
@@ -57,7 +57,7 @@ class UserController extends Controller
 
         return redirect()
                 ->route('users.index')
-                ->with('status', 'User berhasil ditambahkan');
+                ->with('status', 'User baru berhasil ditambahkan');
     }
 
     /**
@@ -93,7 +93,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+
+        $user->name     = $request->get('nama');
+        $user->roles    = $request->get('roles');
+        $user->status   = $request->get('status');
+
+        if ($request->file('avatar') == NULL) {
+            $user->avatar = $user->avatar;
+        } else {
+            if (file_exists(storage_path('app/public/'.$user->avatar))) {
+                \Storage::delete('public/'.$user->avatar);
+            }
+            $file           = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar   = $file;
+        }
+
+        $user->save();
+
+        return redirect()->route('users.index')->with('status', 'User berhasil diupdate');
     }
 
     /**
