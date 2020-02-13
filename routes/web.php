@@ -23,6 +23,8 @@ Route::match(["GET", "POST"], "/register", function(){
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-Route::resource("users", "UserController");
+Route::resource('users', 'UserController');
+
+Route::resource('surat_masuk', 'SuratMasukController');
 
 

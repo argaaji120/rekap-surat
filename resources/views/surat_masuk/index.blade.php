@@ -18,7 +18,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Data Surat Masuk 2019/2020</h3>
-                        <a href="{{ route('add-surat-masuk') }}" class="btn btn-sm btn-flat btn-primary pull-right">
+                        <a href="{{ route('surat_masuk.create') }}" class="btn btn-sm btn-flat btn-primary pull-right">
                             <i class="fa fa-plus"></i>&nbsp; Tambah Surat
                         </a>
                         <a href="" class="btn btn-sm btn-flat btn-default pull-right" style="margin-right:5px">
@@ -33,8 +33,8 @@
                                     <tr>
                                         <th>Tahun</th>
                                         <th>Bulan</th>
-                                        <th>Nomor</th>
                                         <th>Asal Surat</th>
+                                        <th>Perihal</th>
                                         <th>Nomor Surat</th>
                                         <th>Tanggal Surat</th>
                                         <th>Actions</th>
@@ -42,7 +42,46 @@
                                 </thead>
     
                                 <tbody>
-                                    
+                                    @foreach ($surats as $surat)
+                                        <tr>
+                                            <td>{{ $surat->tahun }}</td>
+                                            <td>{{ $surat->bulan }}</td>
+                                            <td>{{ $surat->asal_surat }}</td>
+                                            <td>{{ $surat->perihal }}</td>
+                                            <td>{{ $surat->nomor_surat }}</td>
+                                            <td>{{ $surat->tanggal_surat }}</td>
+                                            <td>
+                                                <button type="button" onclick="window.location.href='{{ route('surat_masuk.edit', [$surat->id]) }}' " class="btn btn-sm btn-flat btn-primary">Edit</button>
+                                                <form action="{{ route('surat_masuk.destroy', [$surat->id]) }}" method="post" style="display:inline">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="button" data-toggle="modal" data-target="#modal-delete{{ $surat->id }}" class="btn btn-flat btn-sm btn-danger">Delete</button>
+                                                    
+                                                    <!-- Modal Konfirmasi Delete -->
+                                                    <div class="modal fade" id="modal-delete{{ $surat->id }}" role="dialog">
+                                                        <div class="modal-dialog modal-sm" style="vertical-align:middle">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    <h5 class="modal-title">Konfirmasi Delete</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Surat dari <b>{{ $surat->asal_surat }}</b> dengan nomor <b>{{ $surat->nomor_surat }}</b> akan dihapus.<br>Apakah Anda yakin?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="delete" class="btn btn-sm btn-flat btn-primary">Ya, Saya yakin</button>
+                                                                    <button type="button" class="btn btn-sm btn-flat btn-default" data-dismiss="modal">Tidak</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
