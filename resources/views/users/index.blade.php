@@ -5,6 +5,27 @@
 @section('link')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+    <style>
+        .modal {
+            text-align: center;
+            padding: 0!important;
+        }
+
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -60,9 +81,34 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-flat btn-sm btn-default">Detail</a>
-                                                <a  href="{{route('users.edit',[$user->id])}}" class="btn btn-flat btn-sm btn-primary">Edit</a>
-                                                <a href="" class="btn btn-flat btn-sm btn-danger">Delete</a>
+                                                <button type="button" onclick="window.location.href='{{route('users.edit',[$user->id])}}'" class="btn btn-sm btn-flat btn-primary">Edit</button>
+                                                <form action="{{route('users.destroy', [$user->id])}}" method="post" style="display:inline">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="button" data-toggle="modal" data-target="#modal-default{{$user->id}}" class="btn btn-flat btn-sm btn-danger">Delete</button>
+                                                    
+                                                    <!-- Modal Konfirmasi Delete -->
+                                                    <div class="modal fade" id="modal-default{{$user->id}}" role="dialog">
+                                                        <div class="modal-dialog modal-sm" style="vertical-align:middle">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    <h5 class="modal-title">Konfirmasi Delete</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Apakah Anda yakin ingin menghapus user <b> {{ $user->name }}</b> ?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="delete" class="btn btn-sm btn-flat btn-primary">Ya, Saya yakin</button>
+                                                                    <button type="button" class="btn btn-sm btn-flat btn-default" data-dismiss="modal">Tidak</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -97,7 +143,7 @@
                 {
                     "targets": 4,
                     "orderable": false,
-                    "width": "18%"
+                    "width": "20%"
                 } ],
             })
         })

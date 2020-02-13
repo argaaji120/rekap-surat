@@ -5,11 +5,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('assets/dist/img/profile_avatar.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('storage/'. Auth::user()->avatar) }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
@@ -25,7 +24,7 @@
             
             <li class="{{ (request()->is('users*')) ? 'active' : '' }}">
                 <a href="{{ route('users.index') }}">
-                    <i class="fa fa-users"></i> <span>Sekretaris</span>
+                    <i class="fa fa-users"></i> <span>Users</span>
                 </a>
             </li>
 

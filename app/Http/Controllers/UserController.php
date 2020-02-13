@@ -111,7 +111,9 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('users.index')->with('status', 'User berhasil diupdate');
+        return redirect()
+                ->route('users.index')
+                ->with('status', 'User berhasil diupdate');
     }
 
     /**
@@ -122,6 +124,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+        $user->delete();
+
+        return redirect()
+                ->route('users.index')
+                ->with('status', 'User berhasil di hapus');
     }
 }

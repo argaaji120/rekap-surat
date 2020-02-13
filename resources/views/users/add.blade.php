@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="avatar">Foto</label>
                                 <input type="file" name="avatar" id="avatar">
-                                <p class="help-block">Example block-level help text here.</p>
+                                <p class="help-block">*<i>notice:</i> ukuran foto maksimal 2 MB</p>
                             </div>
 
                             <!-- Password -->
@@ -70,8 +70,8 @@
 
                             <!-- Password Comfirmation -->
                             <div class="form-group">
-                                <label for="password_confirmation">Password Confirmation</label>
-                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Password Confirmation">
+                                <label for="password_confirmation">Konfirmasi Password</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Konfirmasi Password">
                             </div>
                         </div>
 
