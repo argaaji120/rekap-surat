@@ -26,7 +26,7 @@ class SuratMasukController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('surat_masuk.add');
     }
 
     /**

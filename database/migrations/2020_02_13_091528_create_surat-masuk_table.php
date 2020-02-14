@@ -21,6 +21,8 @@ class CreateSuratMasukTable extends Migration
             $table->string('perihal');
             $table->string('nomor_surat');
             $table->date('tanggal_surat');
+            $table->string('nama_kegiatan');
+            $table->date('tanggal_pelaksanaan');
             $table->text('isi_surat');
             $table->text('keterangan');
             $table->timestamps();

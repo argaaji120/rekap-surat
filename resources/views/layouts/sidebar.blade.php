@@ -28,8 +28,8 @@
                 </a>
             </li>
 
-            <li class="{{ (request()->is('surat-masuk*')) ? 'active' : '' }}">
-                <a href="javascript:void(0)">
+            <li class="{{ (request()->is('surat_masuk*')) ? 'active' : '' }}">
+                <a href="{{ route('surat_masuk.index') }}">
                     <i class="fa fa-download"></i> <span>Surat Masuk</span>
                 </a>
             </li>

@@ -22,7 +22,7 @@
                       <h3 class="box-title">Input Surat Masuk</h3>
                     </div>
 
-                    <form role="form" autocomplete="off" method="POST">
+                    <form role="form" autocomplete="off" method="POST" action="{{ route('surat_masuk.store') }}">
                         @csrf
                         <div class="box-body">
                             <div class="row">
@@ -40,32 +40,24 @@
                                         <label for="bulan">Bulan</label><br>
                                         <select class="form-control select2" name="bulan" id="bulan">
                                             <option selected disabled>Pilih Bulan</option>
-                                            <option value="Januari"     >Januari</option>
-                                            <option value="Februari"    >Februari</option> 
-                                            <option value="Maret"       >Maret</option>
-                                            <option value="April"       >April</option>
-                                            <option value="Mei"         >Mei</option>
-                                            <option value="Juni"        >Juni</option>
-                                            <option value="Juli"        >Juli</option>
-                                            <option value="Agustus"     >Agustus</option>
-                                            <option value="September"   >September</option>
-                                            <option value="Oktober"     >Oktober</option>
-                                            <option value="November"    >November</option>
-                                            <option value="Desember"    >Desember</option>
+                                            <option value="Januari"     > Januari   </option>
+                                            <option value="Februari"    > Februari  </option> 
+                                            <option value="Maret"       > Maret     </option>
+                                            <option value="April"       > April     </option>
+                                            <option value="Mei"         > Mei       </option>
+                                            <option value="Juni"        > Juni      </option>
+                                            <option value="Juli"        > Juli      </option>
+                                            <option value="Agustus"     > Agustus   </option>
+                                            <option value="September"   > September </option>
+                                            <option value="Oktober"     > Oktober   </option>
+                                            <option value="November"    > November  </option>
+                                            <option value="Desember"    > Desember  </option>
                                         </select>
                                     </div>       
                                 </div>
                             </div>
 
                             <div class="row">
-                                <!-- Nomor -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="nomor">Nomor</label>
-                                        <input type="text" name="nomor" class="form-control" id="nomor" placeholder="Nomor">
-                                    </div>        
-                                </div>
-
                                 <!-- Asal Surat -->
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -73,9 +65,7 @@
                                         <input type="text" name="asal_surat" class="form-control" id="asal_surat" placeholder="Asal Surat">
                                     </div>        
                                 </div>
-                            </div>
-
-                            <div class="row">
+                                
                                 <!-- Perihal -->
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -83,25 +73,52 @@
                                         <input type="text" name="perihal" class="form-control" id="perihal" placeholder="Perihal">
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- Nomor Surat -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nomor_surat">Nomor Surat</label>
+                                        <input type="text" name="nomor_surat" class="form-control" id="nomor_surat" placeholder="Nomor Surat">
+                                    </div>        
+                                </div>
 
                                 <!-- Tanggal Surat -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tanggal Surat</label>
+                                        <label for="datepicker">Tanggal Surat</label>
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal">
+                                            <input type="text" name="tanggal_surat" class="form-control pull-right" id="datepicker" placeholder="Tanggal Surat">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="row">
+                                <!-- Nama Kegiatan -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nama_kegiatan">Nama Kegiatan</label>
+                                        <input type="text" name="nama_kegiatan" class="form-control" id="nama_kegiatan" placeholder="Nama Kegiatan">
+                                    </div>        
+                                </div>
 
-                            <!-- Nomor Surat -->
-                            <div class="form-group">
-                                <label for="nomor_surat">Nomor Surat</label>
-                                <input type="text" name="nomor_surat" class="form-control" id="nomor_surat" placeholder="Nomor surat">
+                                <!-- Tanggal Pelaksanaan -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="datepicker2">Tanggal Pelaksanaan</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" name="tanggal_pelaksanaan" class="form-control pull-right" id="datepicker2" placeholder="Tanggal Pelaksanaan">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- Isi Surat -->
@@ -118,10 +135,10 @@
                         </div>
 
                         <div class="box-footer">
-                            <button type="button" class="btn btn-flat btn-default" onclick="window.location.href='{{ route('surat-masuk') }}'">
+                            <button type="button" class="btn btn-flat btn-default" onclick="window.location.href='' ">
                                 <i class="fa fa-reply"></i>&nbsp; Kembali
                             </button>
-                            <button type="submit" class="btn btn-flat btn-primary"><i class="fa fa-save"></i>&nbsp; Simpan</button>
+                            <button type="submit" name="simpan" class="btn btn-flat btn-primary"><i class="fa fa-save"></i>&nbsp; Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -141,6 +158,9 @@
     <script>
         //Date picker
         $('#datepicker').datepicker({
+            autoclose: true
+        })
+        $('#datepicker2').datepicker({
             autoclose: true
         })
 
