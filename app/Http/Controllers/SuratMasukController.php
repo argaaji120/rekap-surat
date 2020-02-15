@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SuratMasuk;
 
 class SuratMasukController extends Controller {
     
-    public function __construct() {
+    public function __construct() 
+    {
         $this->middleware('auth');
     }
 
@@ -15,9 +17,11 @@ class SuratMasukController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $surats = \App\SuratMasuk::all();
-       return view('surat_masuk.index', compact('surats')); 
+    public function index() 
+    {
+        $surats = SuratMasuk::orderBy('bulan', 'DESC')->get();
+
+        return view('surat_masuk.index', compact('surats')); 
     }
 
     /**
@@ -25,7 +29,8 @@ class SuratMasukController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create() 
+    {
         return view('surat_masuk.add');
     }
 
@@ -35,8 +40,25 @@ class SuratMasukController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request) 
+    {
+        $new_data   = new SuratMasuk;
+        $new_data->tahun                = $request->get('tahun');
+        $new_data->bulan                = $request->get('bulan');
+        $new_data->asal_surat           = $request->get('asal_surat');
+        $new_data->perihal              = $request->get('perihal');
+        $new_data->nomor_surat          = $request->get('nomor_surat');
+        $new_data->tanggal_surat        = date('Y-m-d', strtotime($request->get('tanggal_surat')));
+        $new_data->nama_kegiatan        = $request->get('nama_kegiatan');
+        $new_data->tanggal_pelaksanaan  = date('Y-m-d', strtotime($request->get('tanggal_pelaksanaan')));
+        $new_data->isi_surat            = $request->get('isi_surat');
+        $new_data->keterangan           = $request->get('keterangan');
+
+        $new_data->save();
+
+        return redirect()
+                ->route('surat_masuk.index')
+                ->with('status', 'Surat masuk berhasil ditambahkan');
     }
 
     /**
@@ -45,7 +67,8 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id) 
+    {
         //
     }
 
@@ -55,7 +78,8 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id) 
+    {
         //
     }
 
@@ -66,7 +90,8 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id) 
+    {
         //
     }
 
@@ -76,7 +101,8 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id) 
+    {
         //
     }
 }

@@ -26,7 +26,7 @@
                         @csrf
                         <div class="box-body">
                             <div class="row">
-                                <!-- Tahun -->
+                                <!-- Tahun | name:tahun -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="tahun">Tahun</label>
@@ -34,11 +34,11 @@
                                     </div>        
                                 </div>
 
-                                <!-- Bulan -->
+                                <!-- Bulan | name:bulan -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="bulan">Bulan</label><br>
-                                        <select class="form-control select2" name="bulan" id="bulan">
+                                        <select class="form-control select2" name="bulan" id="bulan" style="width:100%">
                                             <option selected disabled>Pilih Bulan</option>
                                             <option value="Januari"     > Januari   </option>
                                             <option value="Februari"    > Februari  </option> 
@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="row">
-                                <!-- Asal Surat -->
+                                <!-- Asal Surat | name:asal_surat -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="asal_surat">Asal Surat</label>
@@ -66,7 +66,7 @@
                                     </div>        
                                 </div>
                                 
-                                <!-- Perihal -->
+                                <!-- Perihal | name:perihal -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="perihal">Perihal</label>
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="row">
-                                <!-- Nomor Surat -->
+                                <!-- Nomor Surat | name:nomor_surat -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nomor_surat">Nomor Surat</label>
@@ -84,7 +84,7 @@
                                     </div>        
                                 </div>
 
-                                <!-- Tanggal Surat -->
+                                <!-- Tanggal Surat | name:tanggal_surat -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="datepicker">Tanggal Surat</label>
@@ -99,7 +99,7 @@
                             </div>
                             
                             <div class="row">
-                                <!-- Nama Kegiatan -->
+                                <!-- Nama Kegiatan | name:nama_kegiatan -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nama_kegiatan">Nama Kegiatan</label>
@@ -107,7 +107,7 @@
                                     </div>        
                                 </div>
 
-                                <!-- Tanggal Pelaksanaan -->
+                                <!-- Tanggal Pelaksanaan | name:tanggal_pelaksanaan -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="datepicker2">Tanggal Pelaksanaan</label>
@@ -121,13 +121,13 @@
                                 </div>
                             </div>
                             
-                            <!-- Isi Surat -->
+                            <!-- Isi Surat | name:isi_surat -->
                             <div class="form-group">
                                 <label for="isi_surat">Isi Surat</label>
                                 <textarea name="isi_surat" id="isi_surat" class="form-control" rows="3" style="resize:none" maxlength="500" placeholder="Isi Surat"></textarea>
                             </div>
 
-                            <!-- Keterangan -->
+                            <!-- Keterangan | name:keterangan -->
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea name="keterangan" id="keterangan" class="form-control" rows="3" style="resize:none" maxlength="500" placeholder="Keterangan"></textarea>
@@ -135,7 +135,7 @@
                         </div>
 
                         <div class="box-footer">
-                            <button type="button" class="btn btn-flat btn-default" onclick="window.location.href='' ">
+                            <button type="button" class="btn btn-flat btn-default" onclick="window.location.href='{{ route('surat_masuk.index') }}' ">
                                 <i class="fa fa-reply"></i>&nbsp; Kembali
                             </button>
                             <button type="submit" name="simpan" class="btn btn-flat btn-primary"><i class="fa fa-save"></i>&nbsp; Simpan</button>
@@ -156,12 +156,25 @@
 
 @section('custom-script')
     <script>
+        $.fn.datepicker.dates['id'] = {
+            days: ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"],
+            daysShort:["Mgu","Sen","Sel","Rab","Kam","Jum","Sab"],
+            daysMin:["Mg","Sn","Sl","Ra","Ka","Ju","Sa"],
+            months:["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"],
+            monthsShort:["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ags","Sep","Okt","Nov","Des"],
+            today:"Hari Ini",
+            clear:"Kosongkan"
+        }
         //Date picker
         $('#datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            language: 'id',
+            format: 'dd-mm-yyyy'
         })
         $('#datepicker2').datepicker({
-            autoclose: true
+            autoclose: true,
+            language: 'id',
+            format: 'dd-mm-yyyy'
         })
 
         //Initialize Select2 Elements
