@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SuratMasuk;
 
-class SuratMasukController extends Controller {
-    
-    public function __construct() 
+class SuratMasukController extends Controller
+{
+
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -17,11 +18,11 @@ class SuratMasukController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
         $surats = SuratMasuk::orderBy('bulan', 'DESC')->get();
 
-        return view('surat_masuk.index', compact('surats')); 
+        return view('surat_masuk.index', compact('surats'));
     }
 
     /**
@@ -29,7 +30,7 @@ class SuratMasukController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() 
+    public function create()
     {
         return view('surat_masuk.add');
     }
@@ -40,9 +41,10 @@ class SuratMasukController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $new_data   = new SuratMasuk;
+
         $new_data->tahun                = $request->get('tahun');
         $new_data->bulan                = $request->get('bulan');
         $new_data->asal_surat           = $request->get('asal_surat');
@@ -57,8 +59,8 @@ class SuratMasukController extends Controller {
         $new_data->save();
 
         return redirect()
-                ->route('surat_masuk.index')
-                ->with('status', 'Surat masuk berhasil ditambahkan');
+            ->route('surat_masuk.index')
+            ->with('status', 'Surat masuk berhasil ditambahkan');
     }
 
     /**
@@ -67,7 +69,7 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) 
+    public function show($id)
     {
         //
     }
@@ -78,7 +80,7 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) 
+    public function edit($id)
     {
         //
     }
@@ -90,7 +92,7 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
         //
     }
@@ -101,7 +103,7 @@ class SuratMasukController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) 
+    public function destroy($id)
     {
         //
     }

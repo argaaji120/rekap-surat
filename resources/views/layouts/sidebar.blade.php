@@ -39,6 +39,13 @@
                     <i class="fa fa-upload"></i> <span>Surat Keluar</span>
                 </a>
             </li>
+            
+            <li class="{{ (request()->is('pengaturan*')) ? 'active' : '' }}">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-cog"></i> <span>Pengaturan</span>
+                </a>
+            </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->

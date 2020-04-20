@@ -56,7 +56,6 @@
                             <table id="example1" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Role</th>
                                         <th>Status</th>
@@ -65,12 +64,8 @@
                                 </thead>
     
                                 <tbody>
-                                    @php
-                                        $no = 1;
-                                    @endphp
                                     @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $no++ }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->roles }}</td>
                                             <td>
@@ -107,7 +102,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </form>
                                             </td>
                                         </tr>
