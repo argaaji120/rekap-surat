@@ -9,13 +9,7 @@ class SuratMasuk extends Model
     protected $table = "surat_masuk";
 
     protected $fillable = [
-        'tahun',
-        'bulan',
-        'asal_surat',
-        'perihal',
-        'nomor_surat',
-        'tanggal_surat',
-        'isi_surat',
-        'keterangan'
+        'tahun', 'bulan', 'asal_surat', 'perihal', 'nomor_surat',
+        'tanggal_surat', 'isi_surat', 'keterangan', 'periode'
     ];
 }

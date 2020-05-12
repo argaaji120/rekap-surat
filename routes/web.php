@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,12 +14,12 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('pages.auth.login');
 });
 
 Auth::routes();
 
-Route::match(["GET", "POST"], "/register", function(){
+Route::match(["GET", "POST"], "/register", function () {
     return redirect("/login");
 })->name("register");
 
@@ -25,6 +27,4 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::resource('users', 'UserController');
 
-Route::resource('surat_masuk', 'SuratMasukController');
-
-
+Route::resource('surat-masuk', 'SuratMasukController');

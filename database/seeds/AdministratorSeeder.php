@@ -1,6 +1,9 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdministratorSeeder extends Seeder
 {
@@ -11,12 +14,11 @@ class AdministratorSeeder extends Seeder
      */
     public function run()
     {
-        $administrator = new  \App\User;
-        $administrator->name = "Arga Aji Prasetyo";
-        $administrator->username = "administrator";
-        $administrator->password = \Hash::make("admin2019");
-        $administrator->roles = "Administrator";
-        $administrator->avatar = "saat-ini-tidak-ada-file.png";
+        $administrator = new  User;
+        $administrator->name        = "Arga Aji Prasetyo";
+        $administrator->username    = "administrator";
+        $administrator->password    = Hash::make("admin2019");
+        $administrator->roles       = "administrator";
 
         $administrator->save();
 

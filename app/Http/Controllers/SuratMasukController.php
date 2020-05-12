@@ -43,20 +43,27 @@ class SuratMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $new_data   = new SuratMasuk;
+        // $new_data   = new SuratMasuk;
 
-        $new_data->tahun                = $request->get('tahun');
-        $new_data->bulan                = $request->get('bulan');
-        $new_data->asal_surat           = $request->get('asal_surat');
-        $new_data->perihal              = $request->get('perihal');
-        $new_data->nomor_surat          = $request->get('nomor_surat');
-        $new_data->tanggal_surat        = date('Y-m-d', strtotime($request->get('tanggal_surat')));
-        $new_data->nama_kegiatan        = $request->get('nama_kegiatan');
-        $new_data->tanggal_pelaksanaan  = date('Y-m-d', strtotime($request->get('tanggal_pelaksanaan')));
-        $new_data->isi_surat            = $request->get('isi_surat');
-        $new_data->keterangan           = $request->get('keterangan');
+        // $new_data->tahun                = $request->get('tahun');
+        // $new_data->bulan                = $request->get('bulan');
+        // $new_data->asal_surat           = $request->get('asal_surat');
+        // $new_data->perihal              = $request->get('perihal');
+        // $new_data->nomor_surat          = $request->get('nomor_surat');
+        // $new_data->tanggal_surat        = date('Y-m-d', strtotime($request->get('tanggal_surat')));
+        // $new_data->nama_kegiatan        = $request->get('nama_kegiatan');
+        // $new_data->tanggal_pelaksanaan  = date('Y-m-d', strtotime($request->get('tanggal_pelaksanaan')));
+        // $new_data->isi_surat            = $request->get('isi_surat');
+        // $new_data->keterangan           = $request->get('keterangan');
 
-        $new_data->save();
+        // $new_data->save();
+
+        $data = $request->all();
+        $data['tanggal_surat'] = date('Y-m-d', strtotime($request->tanggal_surat));
+        dd($request->tanggal_surat);
+        exit;
+
+
 
         return redirect()
             ->route('surat_masuk.index')

@@ -1,18 +1,5 @@
-<!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="{{ asset('storage/'. Auth::user()->avatar) }}" class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-                <p>{{ Auth::user()->name }}</p>
-            </div>
-        </div>
-
-        <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
 
@@ -28,8 +15,8 @@
                 </a>
             </li>
 
-            <li class="{{ (request()->is('surat_masuk*')) ? 'active' : '' }}">
-                <a href="{{ route('surat_masuk.index') }}">
+            <li class="{{ (request()->is('surat-masuk*')) ? 'active' : '' }}">
+                <a href="{{ route('surat-masuk.index') }}">
                     <i class="fa fa-download"></i> <span>Surat Masuk</span>
                 </a>
             </li>
@@ -45,8 +32,6 @@
                     <i class="fa fa-cog"></i> <span>Pengaturan</span>
                 </a>
             </li>
-
         </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

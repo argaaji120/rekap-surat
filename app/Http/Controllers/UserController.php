@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -12,7 +16,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +24,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = \App\User::all();
-        return view('users.index', compact('users'));
+        $users = User::all();
+        return view('pages.users.index')->with([
+            'users' => $users
+        ]);
     }
 
     /**
@@ -31,7 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("users.add");
+        return view("pages.users.add");
     }
 
     /**
@@ -42,22 +48,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $new_user           = new \App\User;
-        $new_user->name     = $request->get('nama');
-        $new_user->username = $request->get('username');
-        $new_user->password = \Hash::make($request->get('password'));
-        $new_user->roles    = $request->get('roles');
+        $new_user = $request->all();
 
-        if ($request->file('avatar')) {
-            $file             = $request->file('avatar')->store('avatars', 'public');
-            $new_user->avatar = $file;
-        }
+        $new_user["password"] = Hash::make($request->password);
 
-        $new_user->save();
+        User::create($new_user);
 
         return redirect()
-                ->route('users.index')
-                ->with('status', 'User baru berhasil ditambahkan');
+            ->route('users.index')
+            ->with('status', 'User baru berhasil ditambahkan');
     }
 
     /**
@@ -79,9 +78,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = \App\User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('users.edit', ['user' => $user]);
+        return view('pages.users.edit')->with([
+            'user' => $user
+        ]);
     }
 
     /**
@@ -93,27 +94,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = \App\User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        $user->name     = $request->get('nama');
-        $user->roles    = $request->get('roles');
-        $user->status   = $request->get('status');
+        $data = $request->all();
 
-        if ($request->file('avatar') == NULL) {
-            $user->avatar = $user->avatar;
+        if ($data["password"] != null) {
+            $data["password"] = Hash::make($request->password);
         } else {
-            if (file_exists(storage_path('app/public/'.$user->avatar))) {
-                \Storage::delete('public/'.$user->avatar);
-            }
-            $file           = $request->file('avatar')->store('avatars', 'public');
-            $user->avatar   = $file;
+            $data["password"] = $user->password;
         }
 
-        $user->save();
+        $user->update($data);
 
         return redirect()
-                ->route('users.index')
-                ->with('status', 'User berhasil diupdate');
+            ->route('users.index')
+            ->with('status', 'User berhasil diupdate');
     }
 
     /**
@@ -124,11 +119,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = \App\User::findOrFail($id);
+        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()
-                ->route('users.index')
-                ->with('status', 'User berhasil di hapus');
+            ->route('users.index')
+            ->with('status', 'User berhasil di hapus');
     }
 }
