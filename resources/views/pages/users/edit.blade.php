@@ -32,14 +32,21 @@
                         </div>
 
                         <!-- name -->
-                        <div class="form-group">
-                            <label for="name">Nama</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Nama" value="{{ $user->name }}">
+                        <div class="form-group @error('name') has-error @enderror">
+                            <label for="name">
+                                @error('name') <i class="fa fa-times-circle-o"></i> @enderror Nama
+                            </label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Nama" value="{{ old('name') ? old('name') : $user->name }}">
+                            @error('name')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- roles -->
-                        <div class="form-group">
-                            <label for="">Roles</label>
+                        <div class="form-group @error('roles') has-error @enderror">
+                            <label for="">
+                                @error('roles') <i class="fa fa-times-circle-o"></i> @enderror Roles
+                            </label>
                             <div class="radio">
                                 <label>
                                     <input {{ $user->roles == "Administrator" ? "checked" : "" }} type="radio" name="roles" value="Administrator" class="flat-blue">&nbsp; Administrator
@@ -50,24 +57,39 @@
                                     <input {{ $user->roles == "Sekretaris" ? "checked" : "" }} type="radio" name="roles" value="Sekretaris" class="flat-blue">&nbsp; Sekretaris
                                 </label>
                             </div>
+                            @error('roles')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- password -->
-                        <div class="form-group">
-                            <label for="password">Password</label>
+                        <div class="form-group @error('password') has-error @enderror">
+                            <label for="password">
+                                @error('password') <i class="fa fa-times-circle-o"></i> @enderror Password
+                            </label>
                             <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                             <small><i>Kosongkan jika tidak ingin mengubah password</i></small>
+                            @error('password')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- password_confirmation -->
-                        <div class="form-group">
-                            <label for="password_confirmation">Password Confirmation</label>
+                        <div class="form-group @error('password_confirmation') has-error @enderror">
+                            <label for="password_confirmation">
+                                @error('password_confirmation') <i class="fa fa-times-circle-o"></i> @enderror Konfirmasi Password
+                            </label>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Password Confirmation">
+                            @error('password_confirmation')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- status -->
-                        <div class="form-group">
-                            <label>Status</label>
+                        <div class="form-group @error('status') has-error @enderror">
+                            <label>
+                                @error('status') <i class="fa fa-times-circle-o"></i> @enderror Status
+                            </label>
                             <div class="radio">
                                 <label>
                                     <input {{ $user->status == "ACTIVE" ? "checked" : "" }} id="status" type="radio" name="status" value="ACTIVE" class="flat-blue">&nbsp; Active
@@ -78,6 +100,9 @@
                                     <input {{ $user->status == "INACTIVE" ? "checked" : "" }} id="status" type="radio" name="status" value="INACTIVE" class="flat-blue">&nbsp; Inactive
                                 </label>
                             </div>
+                            @error('status')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 
 class UserController extends Controller
@@ -48,6 +47,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "username" => "required|min:5|max:255",
+            "name" => "required|max:255",
+            "roles" => "required",
+            "password" => "required|min:6|required_with:password_confirmation|same:password_confirmation",
+            "password_confirmation" => "required",
+        ]);
+
         $new_user = $request->all();
 
         $new_user["password"] = Hash::make($request->password);
@@ -94,6 +101,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "username" => "required|min:5|max:255",
+            "name" => "required|max:255",
+            "roles" => "required",
+            "status" => "required",
+            "password" => "nullable|min:6|required_with:password_confirmation|same:password_confirmation",
+            "password_confirmation" => "nullable",
+        ]);
+
         $user = User::findOrFail($id);
 
         $data = $request->all();

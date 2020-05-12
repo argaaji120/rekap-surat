@@ -25,42 +25,67 @@
                     <div class="box-body">
 
                         <!-- username -->
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                        <div class="form-group @error('username') has-error @enderror">
+                            <label for="username">
+                                @error('username') <i class="fa fa-times-circle-o"></i> @enderror Username
+                            </label>
+                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}" placeholder="Username">
+                            @error('username')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- name -->
-                        <div class="form-group">
-                            <label for="name">Nama</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Nama">
+                        <div class="form-group @error('name') has-error @enderror">
+                            <label for="name">
+                                @error('name') <i class="fa fa-times-circle-o"></i> @enderror Nama
+                            </label>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" placeholder="Nama">
+                            @error('name')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- roles -->
-                        <div class="form-group">
-                            <label for="">Roles</label>
+                        <div class="form-group @error('roles') has-error @enderror">
+                            <label for="">
+                                @error('roles') <i class="fa fa-times-circle-o"></i> @enderror Roles
+                            </label>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="roles" value="Administrator" class="flat-blue">&nbsp; Administrator
+                                    <input type="radio" name="roles" value="Administrator" class="flat-blue" {{ old('roles') == "Administrator" ? "checked" : "" }}>&nbsp; Administrator
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="roles" value="Sekretaris" class="flat-blue">&nbsp; Sekretaris
+                                    <input type="radio" name="roles" value="Sekretaris" class="flat-blue" {{ old('roles') == "Sekretaris" ? "checked" : "" }}>&nbsp; Sekretaris
                                 </label>
                             </div>
+                            @error('roles')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- password -->
-                        <div class="form-group">
-                            <label for="password">Password</label>
+                        <div class="form-group @error('password') has-error @enderror">
+                            <label for="password">
+                                @error('password') <i class="fa fa-times-circle-o"></i> @enderror Password
+                            </label>
                             <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                            @error('password')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- password_confirmation -->
-                        <div class="form-group">
-                            <label for="password_confirmation">Konfirmasi Password</label>
+                        <div class="form-group @error('password_confirmation') has-error @enderror">
+                            <label for="password_confirmation">
+                                @error('password_confirmation') <i class="fa fa-times-circle-o"></i> @enderror Konfirmasi Password
+                            </label>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Konfirmasi Password">
+                            @error('password_confirmation')
+                            <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
