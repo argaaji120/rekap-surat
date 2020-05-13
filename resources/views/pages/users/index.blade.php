@@ -63,7 +63,8 @@
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="button" data-toggle="modal" data-target="#modal-default{{$user->id}}" class="btn btn-flat btn-sm btn-danger">
-                                                <i class="fa fa-trash"></i></button>
+                                                <i class="fa fa-trash"></i>
+                                            </button>
 
                                             <!-- Modal Konfirmasi Delete -->
                                             <div class="modal fade" id="modal-default{{$user->id}}" role="dialog">

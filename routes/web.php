@@ -25,6 +25,10 @@ Route::match(["GET", "POST"], "/register", function () {
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
+Route::get('/pengaturan', 'SettingController@index')->name('pengaturan.index');
+
+Route::put('/pengaturan/periode/{id}', 'SettingController@updatePeriode')->name('pengaturan.periode');
+
 Route::resource('users', 'UserController');
 
 Route::resource('surat-masuk', 'SuratMasukController');

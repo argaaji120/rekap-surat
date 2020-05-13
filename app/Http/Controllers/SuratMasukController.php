@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SuratMasukRequest;
+use App\Periode;
 use Illuminate\Http\Request;
 use App\SuratMasuk;
 
@@ -20,9 +22,13 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $surats = SuratMasuk::orderBy('bulan', 'DESC')->get();
+        $periode = Periode::first();
 
-        return view('surat_masuk.index', compact('surats'));
+        $surat_masuk = SuratMasuk::where('periode', $periode->periode)->orderBy('bulan', 'DESC')->get();
+
+        return view('pages.surat_masuk.index')->with([
+            "surat_masuk" => $surat_masuk
+        ]);
     }
 
     /**
@@ -32,7 +38,7 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
-        return view('surat_masuk.add');
+        return view('pages.surat_masuk.add');
     }
 
     /**
@@ -41,32 +47,20 @@ class SuratMasukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SuratMasukRequest $request)
     {
-        // $new_data   = new SuratMasuk;
-
-        // $new_data->tahun                = $request->get('tahun');
-        // $new_data->bulan                = $request->get('bulan');
-        // $new_data->asal_surat           = $request->get('asal_surat');
-        // $new_data->perihal              = $request->get('perihal');
-        // $new_data->nomor_surat          = $request->get('nomor_surat');
-        // $new_data->tanggal_surat        = date('Y-m-d', strtotime($request->get('tanggal_surat')));
-        // $new_data->nama_kegiatan        = $request->get('nama_kegiatan');
-        // $new_data->tanggal_pelaksanaan  = date('Y-m-d', strtotime($request->get('tanggal_pelaksanaan')));
-        // $new_data->isi_surat            = $request->get('isi_surat');
-        // $new_data->keterangan           = $request->get('keterangan');
-
-        // $new_data->save();
+        $periode = Periode::first();
 
         $data = $request->all();
+
         $data['tanggal_surat'] = date('Y-m-d', strtotime($request->tanggal_surat));
-        dd($request->tanggal_surat);
-        exit;
+        $data['tanggal_pelaksanaan'] = date('Y-m-d', strtotime($request->tanggal_pelaksanaan));
+        $data['periode'] = $periode->periode;
 
-
+        SuratMasuk::create($data);
 
         return redirect()
-            ->route('surat_masuk.index')
+            ->route('surat-masuk.index')
             ->with('status', 'Surat masuk berhasil ditambahkan');
     }
 
@@ -89,7 +83,11 @@ class SuratMasukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $surat_masuk = SuratMasuk::findOrFail($id);
+
+        return view('pages.surat_masuk.edit')->with([
+            "surat_masuk" => $surat_masuk
+        ]);
     }
 
     /**
@@ -99,9 +97,20 @@ class SuratMasukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SuratMasukRequest $request, $id)
     {
-        //
+        $surat_masuk = SuratMasuk::findOrFail($id);
+
+        $data = $request->all();
+
+        $data['tanggal_surat'] = date('Y-m-d', strtotime($request->tanggal_surat));
+        $data['tanggal_pelaksanaan'] = date('Y-m-d', strtotime($request->tanggal_pelaksanaan));
+
+        $surat_masuk->update($data);
+
+        return redirect()
+            ->route('surat-masuk.index')
+            ->with('status', 'Surat berhasil diupdate');
     }
 
     /**
@@ -112,6 +121,11 @@ class SuratMasukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $surat_masuk = SuratMasuk::findOrFail($id);
+        $surat_masuk->delete();
+
+        return redirect()
+            ->route('surat-masuk.index')
+            ->with('status', 'Surat berhasil dihapus');
     }
 }

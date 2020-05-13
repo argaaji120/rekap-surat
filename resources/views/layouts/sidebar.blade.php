@@ -8,7 +8,7 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            
+
             <li class="{{ (request()->is('users*')) ? 'active' : '' }}">
                 <a href="{{ route('users.index') }}">
                     <i class="fa fa-users"></i> <span>Users</span>
@@ -26,9 +26,9 @@
                     <i class="fa fa-upload"></i> <span>Surat Keluar</span>
                 </a>
             </li>
-            
+
             <li class="{{ (request()->is('pengaturan*')) ? 'active' : '' }}">
-                <a href="javascript:void(0)">
+                <a href="{{ route('pengaturan.index') }}">
                     <i class="fa fa-cog"></i> <span>Pengaturan</span>
                 </a>
             </li>
