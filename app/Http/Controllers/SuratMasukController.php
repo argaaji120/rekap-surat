@@ -27,7 +27,8 @@ class SuratMasukController extends Controller
         $surat_masuk = SuratMasuk::where('periode', $periode->periode)->orderBy('bulan', 'DESC')->get();
 
         return view('pages.surat_masuk.index')->with([
-            "surat_masuk" => $surat_masuk
+            "surat_masuk" => $surat_masuk,
+            "periode" => $periode
         ]);
     }
 
@@ -72,7 +73,11 @@ class SuratMasukController extends Controller
      */
     public function show($id)
     {
-        //
+        $surat = SuratMasuk::findOrFail($id);
+
+        return view('pages.surat_masuk.detail')->with([
+            "surat" => $surat
+        ]);
     }
 
     /**

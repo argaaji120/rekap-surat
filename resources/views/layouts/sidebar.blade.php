@@ -22,7 +22,7 @@
             </li>
 
             <li class="{{ (request()->is('surat-keluar*')) ? 'active' : '' }}">
-                <a href="javascript:void(0)">
+                <a href="{{ route('surat-keluar.index') }}">
                     <i class="fa fa-upload"></i> <span>Surat Keluar</span>
                 </a>
             </li>

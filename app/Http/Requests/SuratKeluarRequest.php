@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SuratMasukRequest extends FormRequest
+class SuratKeluarRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class SuratMasukRequest extends FormRequest
     return [
       "tahun" => "required|min:4|numeric",
       "bulan" => "required",
-      "asal_surat" => "required|max:40",
+      "penerima" => "required|max:40",
       "perihal" => "required|max:30",
       "nomor_surat" => "required|max:60",
       "tanggal_surat" => "required",

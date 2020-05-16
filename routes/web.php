@@ -32,3 +32,5 @@ Route::put('/pengaturan/periode/{id}', 'SettingController@updatePeriode')->name(
 Route::resource('users', 'UserController');
 
 Route::resource('surat-masuk', 'SuratMasukController');
+
+Route::resource('surat-keluar', 'SuratKeluarController');

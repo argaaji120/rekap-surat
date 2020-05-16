@@ -1,5 +1,7 @@
 <!-- jQuery 3 -->
 <script src="{{ asset('assets/plugins/jquery/dist/jquery.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('assets/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- Auto Size -->
@@ -24,8 +26,6 @@
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 
 
-
 <script>
     autosize(document.querySelectorAll('textarea'));
-
 </script>
