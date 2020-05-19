@@ -14,7 +14,7 @@
 <section class="content">
 
   @if (session('status'))
-  <div class="alert alert-success alert-dismissible">
+  <div class="alert alert-success alert-dismissible" id="alert-success">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
     <p>{{ session('status') }}</p>
@@ -29,7 +29,9 @@
           <a href="{{ route('surat-masuk.create') }}" class="btn btn-sm btn-flat btn-primary pull-right">
             <i class="fa fa-plus"></i>&nbsp; Tambah Surat
           </a>
-          <a href="" class="btn btn-sm btn-flat btn-default pull-right" style="margin-right:5px">
+          <a href="{{ route('surat-masuk.export') }}"
+            class="btn btn-sm btn-flat btn-default pull-right {{ count($surat_masuk) == 0 ? 'disabled' : '' }}"
+            style="margin-right:5px">
             <i class="fa  fa-file"></i>&nbsp; Export Excel
           </a>
         </div>
@@ -119,5 +121,11 @@
 @push('after-script')
 <script>
   $('#example1').DataTable()
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#alert-success").delay(3000).fadeOut();
+  });
 </script>
 @endpush

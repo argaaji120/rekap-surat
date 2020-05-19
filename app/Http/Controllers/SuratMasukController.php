@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SuratMasukExport;
 use App\Http\Requests\SuratMasukRequest;
 use App\Periode;
 use Illuminate\Http\Request;
 use App\SuratMasuk;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SuratMasukController extends Controller
 {
@@ -24,7 +26,7 @@ class SuratMasukController extends Controller
     {
         $periode = Periode::first();
 
-        $surat_masuk = SuratMasuk::where('periode', $periode->periode)->orderBy('bulan', 'DESC')->get();
+        $surat_masuk = SuratMasuk::where('periode', $periode->periode)->orderBy('created_at', 'ASC')->get();
 
         return view('pages.surat_masuk.index')->with([
             "surat_masuk" => $surat_masuk,
@@ -132,5 +134,13 @@ class SuratMasukController extends Controller
         return redirect()
             ->route('surat-masuk.index')
             ->with('status', 'Surat berhasil dihapus');
+    }
+
+    public function export()
+    {
+        $data_periode = Periode::first();
+        $periode      = str_replace('/', '-', $data_periode->periode);
+
+        return Excel::download(new SuratMasukExport, 'Data Surat Masuk Periode ' . $periode . '.xlsx');
     }
 }

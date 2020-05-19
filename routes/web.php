@@ -31,6 +31,10 @@ Route::put('/pengaturan/periode/{id}', 'SettingController@updatePeriode')->name(
 
 Route::resource('users', 'UserController');
 
+Route::get('surat-masuk/export', 'SuratMasukController@export')->name('surat-masuk.export');
+
 Route::resource('surat-masuk', 'SuratMasukController');
+
+Route::get('surat-keluar/export', 'SuratKeluarController@export')->name('surat-keluar.export');
 
 Route::resource('surat-keluar', 'SuratKeluarController');
